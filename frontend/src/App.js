@@ -5,6 +5,8 @@ import Login from './components/Login';
 import Register from './components/Register';
 import EditPost from './components/EditPost';
 import CreatePost from './components/CreatePost';
+import './styles.css';
+
 
 const App = () => {
   const handleLogout = () => {

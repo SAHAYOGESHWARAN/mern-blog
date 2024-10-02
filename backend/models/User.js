@@ -1,4 +1,3 @@
-
 const mongoose = require('mongoose');
 const bcrypt = require('bcryptjs');
 
@@ -18,17 +17,18 @@ const userSchema = new mongoose.Schema({
     required: true,
   },
 });
-// Check if the model already exists to avoid OverwriteModelError
-const User = mongoose.models.User || mongoose.model('User', userSchema);
 
 // Hash the password before saving
 userSchema.pre('save', async function (next) {
   if (!this.isModified('password')) {
-    next();
+    return next(); // Don't hash the password if it hasn't changed
   }
   const salt = await bcrypt.genSalt(10);
   this.password = await bcrypt.hash(this.password, salt);
+  next();
 });
 
-const User = mongoose.model('User', userSchema);
+// Check if the model already exists to avoid OverwriteModelError
+const User = mongoose.models.User || mongoose.model('User', userSchema);
+
 module.exports = User;

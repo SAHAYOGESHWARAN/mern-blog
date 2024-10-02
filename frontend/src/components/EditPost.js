@@ -13,7 +13,6 @@ const EditPost = () => {
       const response = await axios.get(`/api/posts/${id}`);
       setPost(response.data);
     };
-    
     fetchPost();
   }, [id]);
 

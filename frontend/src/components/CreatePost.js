@@ -9,14 +9,17 @@ const CreatePost = () => {
   const handleCreate = async (e) => {
     e.preventDefault();
     try {
-      await axios.post('/api/posts', { title, content }, {
-        headers: { Authorization: `Bearer ${localStorage.getItem('token')}` },
-      });
+      await axios.post(
+        '/api/posts',
+        { title, content },
+        { headers: { Authorization: `Bearer ${localStorage.getItem('token')}` } }
+      );
       alert('Post created!');
       setTitle('');
       setContent('');
     } catch (error) {
       console.error('Create post error:', error.response.data.message);
+      alert('Error creating post: ' + error.response.data.message);
     }
   };
 

@@ -1,46 +1,31 @@
-
 import React, { useEffect, useState } from 'react';
-import axios from 'axios';
-import { Link } from 'react-router-dom';
-import CreatePost from './CreatePost';
+import axios from '../axios'; // Adjust the path if necessary
 
 const Home = () => {
   const [posts, setPosts] = useState([]);
 
   useEffect(() => {
     const fetchPosts = async () => {
-      const response = await axios.get('/api/posts');
-      setPosts(response.data);
+      try {
+        const response = await axios.get('/posts'); // Update the endpoint based on your API
+        setPosts(response.data);
+      } catch (error) {
+        console.error('Error fetching posts:', error);
+      }
     };
+
     fetchPosts();
   }, []);
 
-  const handleDelete = async (id) => {
-    try {
-      await axios.delete(`/api/posts/${id}`, {
-        headers: { Authorization: `Bearer ${localStorage.getItem('token')}` },
-      });
-      alert('Post deleted!');
-      setPosts(posts.filter(post => post._id !== id)); // Update state
-    } catch (error) {
-      console.error('Delete post error:', error.response.data.message);
-      alert('Error deleting post: ' + error.response.data.message);
-    }
-  };
-
   return (
     <div>
-      <h1>Blog Posts</h1>
-      <CreatePost />
+      <h1>Home</h1>
+      <h2>Posts:</h2>
       <ul>
         {posts.map((post) => (
           <li key={post._id}>
-            <h2>{post.title}</h2>
+            <h3>{post.title}</h3>
             <p>{post.content}</p>
-            <p><strong>Author:</strong> {post.author}</p>
-            <Link to={`/post/edit/${post._id}`}>Edit</Link>
-            <button onClick={() => handleDelete(post._id)}>Delete</button>
-            <Link to={`/post/${post._id}`}>View Details</Link>
           </li>
         ))}
       </ul>

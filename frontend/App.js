@@ -1,32 +1,24 @@
+// frontend/src/App.js
+import React from 'react';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import Register from './components/Register';
+import Login from './components/Login';
+import Post from './components/Post';
+import Home from './components/Home'; // A new component to list all posts
 
-import React, { useEffect, useState } from 'react';
-import axios from 'axios';
-
-function App() {
-  const [posts, setPosts] = useState([]);
-
-  useEffect(() => {
-    const fetchPosts = async () => {
-      const response = await axios.get('/api/posts');
-      setPosts(response.data);
-    };
-    fetchPosts();
-  }, []);
-
+const App = () => {
   return (
-    <div className="App">
-      <h1>Blog Posts</h1>
-      <ul>
-        {posts.map(post => (
-          <li key={post._id}>
-            <h2>{post.title}</h2>
-            <p>{post.content}</p>
-            <p><strong>Author:</strong> {post.author}</p>
-          </li>
-        ))}
-      </ul>
-    </div>
+    <Router>
+      <div className="App">
+        <Switch>
+          <Route path="/" exact component={Home} />
+          <Route path="/register" component={Register} />
+          <Route path="/login" component={Login} />
+          <Route path="/post/:id" component={Post} />
+        </Switch>
+      </div>
+    </Router>
   );
-}
+};
 
 export default App;

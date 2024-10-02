@@ -2,6 +2,7 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
+import CreatePost from './CreatePost'; // Import CreatePost component
 
 const Home = () => {
   const [posts, setPosts] = useState([]);
@@ -17,6 +18,7 @@ const Home = () => {
   return (
     <div>
       <h1>Blog Posts</h1>
+      <CreatePost /> {/* Include CreatePost component */}
       <ul>
         {posts.map((post) => (
           <li key={post._id}>

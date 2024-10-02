@@ -3,8 +3,9 @@ import React from 'react';
 import { BrowserRouter as Router, Route, Switch, Link } from 'react-router-dom';
 import Register from './components/Register';
 import Login from './components/Login';
-import Post from './components/Post';
+import Post from './components/Post'; // Post component can be for detailed view
 import Home from './components/Home';
+import EditPost from './components/EditPost'; // Import EditPost
 
 const App = () => {
   const handleLogout = () => {
@@ -25,7 +26,7 @@ const App = () => {
           <Route path="/" exact component={Home} />
           <Route path="/register" component={Register} />
           <Route path="/login" component={Login} />
-          <Route path="/post/:id" component={Post} />
+          <Route path="/post/edit/:id" component={EditPost} /> {/* Add EditPost route */}
         </Switch>
       </div>
     </Router>

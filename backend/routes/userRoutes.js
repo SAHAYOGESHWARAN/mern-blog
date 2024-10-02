@@ -3,6 +3,7 @@ const express = require('express');
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcryptjs');
 const User = require('../models/User');
+const { registerUser, loginUser } = require('../controllers/userController');
 const { protect } = require('../middleware/authMiddleware');
 const router = express.Router();
 
@@ -56,6 +57,13 @@ router.post('/login', async (req, res) => {
   res.status(401).json({ message: 'Invalid email or password' });
 }
 });
+
+// Register User
+router.post('/register', registerUser);
+
+// Login User
+router.post('/login', loginUser);
+
 
 // Get current user
 router.get('/profile', protect, (req, res) => {

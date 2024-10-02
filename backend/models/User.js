@@ -18,6 +18,8 @@ const userSchema = new mongoose.Schema({
     required: true,
   },
 });
+// Check if the model already exists to avoid OverwriteModelError
+const User = mongoose.models.User || mongoose.model('User', userSchema);
 
 // Hash the password before saving
 userSchema.pre('save', async function (next) {

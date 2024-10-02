@@ -40,6 +40,7 @@ const Home = () => {
             <p><strong>Author:</strong> {post.author}</p>
             <Link to={`/post/edit/${post._id}`}>Edit</Link>
             <button onClick={() => handleDelete(post._id)}>Delete</button>
+            <Link to={`/post/${post._id}`}>View Details</Link>
           </li>
         ))}
       </ul>

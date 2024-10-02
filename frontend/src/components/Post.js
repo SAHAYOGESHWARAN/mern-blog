@@ -1,7 +1,6 @@
-
 import React, { useEffect, useState } from 'react';
-import axios from 'axios';
 import { useParams } from 'react-router-dom';
+import axios from 'axios';
 
 const Post = () => {
   const { id } = useParams();
@@ -15,13 +14,12 @@ const Post = () => {
     fetchPost();
   }, [id]);
 
-  if (!post) return <div>Loading...</div>;
+  if (!post) return <p>Loading...</p>;
 
   return (
     <div>
       <h2>{post.title}</h2>
       <p>{post.content}</p>
-      <p><strong>Author:</strong> {post.author}</p>
     </div>
   );
 };

@@ -18,27 +18,13 @@ const EditPost = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     await axios.put(`/api/posts/${id}`, post);
-    navigate(`/post/${id}`); // Use navigate to redirect after editing
+    navigate(`/post/${id}`);
   };
 
   return (
     <form onSubmit={handleSubmit}>
+      <h2>Edit Post</h2>
       <input
         type="text"
         value={post.title}
-        onChange={(e) => setPost({ ...post, title: e.target.value })}
-        placeholder="Title"
-        required
-      />
-      <textarea
-        value={post.content}
-        onChange={(e) => setPost({ ...post, content: e.target.value })}
-        placeholder="Content"
-        required
-      />
-      <button type="submit">Update Post</button>
-    </form>
-  );
-};
-
-export default EditPost;
+       

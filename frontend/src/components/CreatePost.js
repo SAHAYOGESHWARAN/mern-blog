@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import axios from 'axios';
 
@@ -6,25 +5,21 @@ const CreatePost = () => {
   const [title, setTitle] = useState('');
   const [content, setContent] = useState('');
 
-  const handleCreate = async (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await axios.post(
-        '/api/posts',
-        { title, content },
-        { headers: { Authorization: `Bearer ${localStorage.getItem('token')}` } }
-      );
-      alert('Post created!');
-      setTitle('');
-      setContent('');
+      const response = await axios.post('/api/posts', {
+        title,
+        content,
+      });
+      console.log(response.data);
     } catch (error) {
-      console.error('Create post error:', error.response.data.message);
-      alert('Error creating post: ' + error.response.data.message);
+      console.error(error);
     }
   };
 
   return (
-    <form onSubmit={handleCreate}>
+    <form onSubmit={handleSubmit}>
       <h2>Create Post</h2>
       <input
         type="text"
@@ -39,7 +34,7 @@ const CreatePost = () => {
         onChange={(e) => setContent(e.target.value)}
         required
       />
-      <button type="submit">Create</button>
+      <button type="submit">Create Post</button>
     </form>
   );
 };
